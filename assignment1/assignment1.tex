@@ -189,7 +189,57 @@ All values returned by fun1() are added to static local variable i in fun2() -
 \newline
 therefore ,
 \newline
+\begin{equation*}
 i = 5+9+12+14+15 = 55.
-\newline
+\end{equation*}
 Hence, ans = 55.
+
+\section{Mathematical Formulation}
+From the table we can derive fun1() as -
+\begin{equation*}
+fun1(n) = n 
+\end{equation*}
+\begin{equation*}
+fun1(n-1) = (n-1) + fun1(n) = (n-1) + n 
+\end{equation*}
+\begin{equation*}
+fun1(n-2) = (n-2) + fun1(n-1) = (n-2) + (n-1) + n
+\end{equation*}
+
+Therefore
+\begin{equation*}
+fun1(x) = \sum_{i=0}^{n-x} (n-i)
+\end{equation*}
+
+and since fun2() is the summation of fun1(x) from x=1 to n.\\
+\begin{equation*}
+fun2(n) = \sum_{j=1}^{n} \sum_{i=0}^{n-x} (n-i)
+\end{equation*}
+\begin{equation*}
+fun2(n) = \sum_{j=1}^{n} \frac{1}{2}(n+j)(n-j+1)
+\end{equation*}
+\begin{equation*}
+fun2(n) = \frac{1}{2} (\sum_{j=1}^{n} (n\textsuperscript{2} + n) + \sum_{j=1}^{n} (j - j\textsuperscript{2}) )
+\end{equation*}
+\begin{equation*}
+fun2(n) = \frac{1}{6} (2n\textsuperscript{3} + 3n\textsuperscript{2} + n)
+\end{equation*}
+
+
+\section{Verification} 
+For n = 5, the output of the c code was 55.\\
+Using the mathematical formula -
+\begin{equation*}
+fun2(n) = \frac{1}{6} (2n\textsuperscript{3} + 3n\textsuperscript{2} + n)
+\end{equation*}
+\begin{equation*}
+fun2(5) = \frac{1}{6} (2*5\textsuperscript{3} + 3*5\textsuperscript{2} + 5) \\
+\end{equation*}
+\begin{equation*}
+fun2(5) = \frac{1}{6} (250 + 75 +5) \\
+\end{equation*}
+\begin{equation*}
+fun2(5) = \frac{1}{6} 330 = 55.\\
+\end{equation*}
+Hence verified.
 \end{document}
