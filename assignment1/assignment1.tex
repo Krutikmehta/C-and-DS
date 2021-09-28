@@ -136,29 +136,29 @@ https://github.com/Krutikmehta/C-and-DS/tree/master/assignment1
 \end{lstlisting}
 \section{Problem}
 (CS-2020/CS/Q.NO:46) Consider the following C functions.
-\begin{lstlisting}
-int fun1(int n){
+\begin{lstlisting}[mathescape=true]
+int $f_1$(int n){
     static int i=0;
     if(n>0){
         i++;
-        fun1(n-1);
+        $f_1$(n-1);
     }
     return i;
 }
 \end{lstlisting}
 
-\begin{lstlisting}
-int fun2(int n){
+\begin{lstlisting}[mathescape=true]
+int $f_2$(int n){
     static int i=0;
     if(n>0){
-        i += fun1(n);
-        fun2(n-1);
+        i += $f_1$(n);
+        $f_2$(n-1);
     }
     return i;
 }
 \end{lstlisting}
 
-Return the value of fun2(5) - 
+Return the value of $f_2$(5) - 
 
 \section{Solution}
 Both the functions have static local variable. Static local variables have two characteristics  - 
@@ -168,24 +168,24 @@ Both the functions have static local variable. Static local variables have two c
 \end{enumerate}
 \textbf{Explanation}
 % \newline
-fun1(n) returns the value of i(which has scope limited to fun1) after incrementing it by n.
+$f_1(n)$ returns the value of i(which has scope limited to $f_1$) after incrementing it by n.
 \newline
-fun2(n) calls fun1(i) from i=n to i=1 and adds the value returned by fun1 to i(which has scope limited to fun2).
+$f_2(n)$ calls $f_1(i)$ from i=n to i=1 and adds the value returned by $f_1$ to i(which has scope limited to $f_2$).
 \newline
-when the first time fun1() is called for n=5, i is initialzed to 0. \\
+when the first time $f_1$ is called for n=5, i is initialzed to 0. \\
 The return value of each call is tabulated below.
 \begin{center}
 \begin{tabular}{ |c|c|c| } 
  \hline
-fun1(5)  & i=i+5; & i = 5. \\
-fun1(4)  & i=i+4; & i = 9. \\
-fun1(3)  & i=i+3; & i = 12. \\
-fun1(2)  & i=i+2; & i = 14. \\
-fun1(1)  & i=i+1; & i = 15. \\
+$f_1$(5)  & i=i+5; & i = 5. \\
+$f_1$(4)  & i=i+4; & i = 9. \\
+$f_1$(3)  & i=i+3; & i = 12. \\
+$f_1$(2)  & i=i+2; & i = 14. \\
+$f_1$(1)  & i=i+1; & i = 15. \\
  \hline
 \end{tabular}
 \end{center}
-All values returned by fun1() are added to static local variable i in fun2() - 
+All values returned by $f_1$ are added to static local variable i in $f_2$ - 
 \newline
 therefore ,
 \newline
@@ -195,51 +195,51 @@ i = 5+9+12+14+15 = 55.
 Hence, ans = 55.
 
 \section{Mathematical Formulation}
-From the table we can derive fun1() as -
-\begin{equation*}
-fun1(n) = n 
-\end{equation*}
-\begin{equation*}
-fun1(n-1) = (n-1) + fun1(n) = (n-1) + n 
-\end{equation*}
-\begin{equation*}
-fun1(n-2) = (n-2) + fun1(n-1) = (n-2) + (n-1) + n
-\end{equation*}
+From the table we can derive $f_1$ as -
+\begin{equation}
+f_1(n) = n 
+\end{equation}
+\begin{equation}
+f_1(n-1) = (n-1) + f_1(n) = (n-1) + n 
+\end{equation}
+\begin{equation}
+f_1(n-2) = (n-2) + f_1(n-1) = (n-2) + (n-1) + n
+\end{equation}
 
 Therefore
-\begin{equation*}
-fun1(x) = \sum_{i=0}^{n-x} (n-i)
-\end{equation*}
+\begin{equation}
+f_1(x) = \sum_{i=0}^{n-x} (n-i)
+\end{equation}
 
-and since fun2() is the summation of fun1(x) from x=1 to n.\\
-\begin{equation*}
-fun2(n) = \sum_{j=1}^{n} \sum_{i=0}^{n-x} (n-i)
-\end{equation*}
-\begin{equation*}
-fun2(n) = \sum_{j=1}^{n} \frac{1}{2}(n+j)(n-j+1)
-\end{equation*}
-\begin{equation*}
-fun2(n) = \frac{1}{2} (\sum_{j=1}^{n} (n\textsuperscript{2} + n) + \sum_{j=1}^{n} (j - j\textsuperscript{2}) )
-\end{equation*}
-\begin{equation*}
-fun2(n) = \frac{1}{6} (2n\textsuperscript{3} + 3n\textsuperscript{2} + n)
-\end{equation*}
+and since $f_2(n)$ is the summation of $f_1(x)$ from x=1 to n.\\
+\begin{equation}
+f_2(n) = \sum_{j=1}^{n} \sum_{i=0}^{n-j} (n-i)
+\end{equation}
+\begin{equation}
+f_2(n) = \sum_{j=1}^{n} \frac{1}{2}(n+j)(n-j+1)
+\end{equation}
+\begin{equation}
+f_2(n) = \frac{1}{2} (\sum_{j=1}^{n} (n\textsuperscript{2} + n) + \sum_{j=1}^{n} (j - j\textsuperscript{2}) )
+\end{equation}
+\begin{equation}
+f_2(n) = \frac{1}{6} (2n\textsuperscript{3} + 3n\textsuperscript{2} + n)
+\end{equation}
 
 
 \section{Verification} 
 For n = 5, the output of the c code was 55.\\
 Using the mathematical formula -
-\begin{equation*}
-fun2(n) = \frac{1}{6} (2n\textsuperscript{3} + 3n\textsuperscript{2} + n)
-\end{equation*}
-\begin{equation*}
-fun2(5) = \frac{1}{6} (2*5\textsuperscript{3} + 3*5\textsuperscript{2} + 5) \\
-\end{equation*}
-\begin{equation*}
-fun2(5) = \frac{1}{6} (250 + 75 +5) \\
-\end{equation*}
-\begin{equation*}
-fun2(5) = \frac{1}{6} 330 = 55.\\
-\end{equation*}
+\begin{equation}
+f_2(n) = \frac{1}{6} (2n\textsuperscript{3} + 3n\textsuperscript{2} + n)
+\end{equation}
+\begin{equation}
+f_2(5) = \frac{1}{6} (2*5\textsuperscript{3} + 3*5\textsuperscript{2} + 5) \\
+\end{equation}
+\begin{equation}
+f_2(5) = \frac{1}{6} (250 + 75 +5) \\
+\end{equation}
+\begin{equation}
+f_2(5) = \frac{1}{6} 330 = 55.\\
+\end{equation}
 Hence verified.
 \end{document}
