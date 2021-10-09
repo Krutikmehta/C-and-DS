@@ -195,18 +195,31 @@ i = 5+9+12+14+15 = 55.
 Hence, ans = 55.
 
 \section{Mathematical Formulation}
-From the table we can derive $f_1$ as -
+let n be the argument passed to \begin{math}f_2\end{math}.
+From the table we can derive $f_1$ as - \\
+After the first call to \begin{math}f_1\end{math}, n is added to i and returned by \begin{math}f_1\end{math}.
 \begin{equation}
 f_1(n) = n 
 \end{equation}
+After the second call to \begin{math}f_1\end{math}, n-1 is added to i, which can be written as-
 \begin{equation}
-f_1(n-1) = (n-1) + f_1(n) = (n-1) + n 
+f_1(n-1) = (n-1) + n 
 \end{equation}
 \begin{equation}
-f_1(n-2) = (n-2) + f_1(n-1) = (n-2) + (n-1) + n
+f_1(n-1)= (n-1) + f_1(n) 
 \end{equation}
-
-Therefore
+Therefore,
+\begin{equation}
+f_1(n) = f_1(n-1) - (n-1) 
+\end{equation}
+similarly for next calls, n-2 is added to i,
+\begin{equation}
+f_1(n-2) = (n-2) + f_1(n-1) 
+\end{equation}
+\begin{equation}
+f_1(n-1) = f_1(n-2) - (n-2)
+\end{equation}
+Therefore, we can formulate \begin{math}f_1\end{math} as -
 \begin{equation}
 f_1(x) = \sum_{i=0}^{n-x} (n-i)
 \end{equation}
