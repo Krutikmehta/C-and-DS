@@ -224,15 +224,19 @@ Therefore, we can formulate \begin{math}f_1\end{math} as -
 f_1(x) = \sum_{i=0}^{n-x} (n-i)
 \end{equation}
 
+\begin{equation}
+f_1(x) = \frac{n(n+1) - x(x-1)}{2}
+\end{equation}
+
 and since $f_2(n)$ is the summation of $f_1(x)$ from x=1 to n.\\
 \begin{equation}
-f_2(n) = \sum_{j=1}^{n} \sum_{i=0}^{n-j} (n-i)
+f_2(n) = \sum_{x=1}^{n} f_1(x)
 \end{equation}
 \begin{equation}
-f_2(n) = \sum_{j=1}^{n} \frac{1}{2}(n+j)(n-j+1)
+f_2(n) = \sum_{x=1}^{n}  \frac{n(n+1) - x(x-1)}{2}
 \end{equation}
 \begin{equation}
-f_2(n) = \frac{1}{2} (\sum_{j=1}^{n} (n\textsuperscript{2} + n) + \sum_{j=1}^{n} (j - j\textsuperscript{2}) )
+f_2(n) = \frac{1}{2} (\sum_{x=1}^{n} (n\textsuperscript{2} + n) + \sum_{x=1}^{n} (x - x\textsuperscript{2}) )
 \end{equation}
 \begin{equation}
 f_2(n) = \frac{1}{6} (2n\textsuperscript{3} + 3n\textsuperscript{2} + n)
